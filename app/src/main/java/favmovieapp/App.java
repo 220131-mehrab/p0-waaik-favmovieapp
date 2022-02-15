@@ -4,11 +4,9 @@
 package favmovieapp;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        MovieRepository movieReposiory = new MovieRepository;
+        MovieService movieService = new MovieService;
+        MovieServer movieServer = new MovieServer;
     }
 }
