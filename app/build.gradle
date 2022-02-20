@@ -12,6 +12,14 @@ plugins {
     id 'application'
 }
 
+mainClassName= 'com.revature.waaik.favmovieapp.App'
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -20,6 +28,11 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1.1-jre'
+    //Apache FasterJackson Databind
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    //Zulu jdk 11
+    implementation 'hu.blackbelt.judo.eclipse.jdk.zulu:jdk-bundles:11.0.8'
+
 }
 
 testing {

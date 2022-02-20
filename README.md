@@ -1,5 +1,5 @@
 #Favorite Movie App
-This an app that allows you to search for your favorite movies from 2000-2020, using IMBD database.
+This an app that allows you to search for your favorite movies from 2000-2020, using TMBD database.
 
 #User Stories
 - Will be able to view list of movies from the browser with promotional pictures of the selected movie.

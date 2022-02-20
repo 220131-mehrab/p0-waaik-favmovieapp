@@ -3,10 +3,15 @@
  */
 package favmovieapp;
 
+import Repositories.MovieRepository;
+
+import static jdk.internal.logger.DefaultLoggerFinder.SharedLoggers.system;
+
 public class App {
     public static void main(String[] args) {
-        MovieRepository movieReposiory = new MovieRepository;
-        MovieService movieService = new MovieService;
-        MovieServer movieServer = new MovieServer;
+        MovieRepository movieRepository = new MovieRepository();
+        MovieService movieService = new MovieService();
+        MovieServer movieServer = new MovieServer();
+        system.out.println(movies.getOriginal_title);
     }
 }
