@@ -1,6 +1,16 @@
-package domains;
+package favmovieapp.domains;
+
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Movies {
+    String[] movieRay = new String[1000];
+
+
     //creating Movie variables
     private String adult;
     private String backdrop_path;
@@ -18,11 +28,6 @@ public class Movies {
     private String video;
     private String id_imbd;
     //initializing Movie object
-    public Movies(){
-        super();
-    }
-
-
 
 
     //initializing Movies variables
@@ -43,20 +48,36 @@ public class Movies {
         this.video = video;
         this.id_imbd = id_imbd;
     }
+
+
     //setting up get methods for variables to save values
-    public String getAdult() {return adult;}
+    public String getAdult() {
+        return adult;
+    }
 
-    public String getBackdrop_path() {return backdrop_path;}
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
 
-    public String getId() {return id;}
+    public String getId() {
+        return id;
+    }
 
-    public String getTitle() {return title;}
+    public String getTitle() {
+        return title;
+    }
 
-    public String getVote_average() {return vote_average;}
+    public String getVote_average() {
+        return vote_average;
+    }
 
-    public String getVote_count() {return vote_count;}
+    public String getVote_count() {
+        return vote_count;
+    }
 
-    public String getPopularity() {return popularity;}
+    public String getPopularity() {
+        return popularity;
+    }
 
     public String getGenre_ids() {
         return genre_ids;
@@ -88,5 +109,25 @@ public class Movies {
 
     public String getId_imbd() {
         return id_imbd;
+    }
+
+    public Movies(String movieJson) {
+        //Storing Json info into new file
+        File file = new File(movieJson);
+
+        //parses data into a data tree collection
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = null;
+        try {
+            jsonNode = mapper.readTree(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //pulls out specific data you want from node string data tree
+        String movieTitle = String.valueOf(jsonNode.get("title"));
+        String movieOverview = String.valueOf(jsonNode.get("overview"));
+        String movieReleaseDate = String.valueOf(jsonNode.get("release_date"));
+        System.out.println(movieTitle + "\n" + movieOverview + "\n" + movieReleaseDate);
+
     }
 }

@@ -32,6 +32,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
     //Zulu jdk 11
     implementation 'hu.blackbelt.judo.eclipse.jdk.zulu:jdk-bundles:11.0.8'
+    //OpenCSV
+    implementation 'com.opencsv:opencsv:5.6'
 
 }
 
