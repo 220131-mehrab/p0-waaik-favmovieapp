@@ -1,14 +1,8 @@
 package favmovieapp.domains;
 
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
-
 public class Movies {
-    String[] movieRay = new String[1000];
+
+
 
 
     //creating Movie variables
@@ -91,8 +85,8 @@ public class Movies {
         return original_title;
     }
 
-    public String getOverview() {
-        return overview;
+    public String getOverview(String overview) {
+        return this.overview;
     }
 
     public String getPoster_path() {
@@ -111,23 +105,83 @@ public class Movies {
         return id_imbd;
     }
 
-    public Movies(String movieJson) {
+    public void setAdult(String adult) {
+        this.adult = adult;}
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;}
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle() {
+        this.title = title;
+    }
+
+    public void setVote_average(String vote_average) {
+        this.vote_average = vote_average;
+    }
+
+    public void setVote_count(String vote_count) {
+        this.vote_count = vote_count;
+    }
+
+    public void setPopularity(String popularity) {
+        this.popularity = popularity;
+    }
+
+    public void setGenre_ids(String genre_ids) {
+        this.genre_ids = genre_ids;
+    }
+
+    public void setOriginal_language(String original_language) {
+        this.original_language = original_language;
+    }
+
+    public void setOriginal_title(String original_title) {
+        this.original_title = original_title;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
+    }
+
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
+    public void setId_imbd(String id_imbd) {
+        this.id_imbd = id_imbd;
+    }
+
+    public Movies() {
+        super();
         //Storing Json info into new file
-        File file = new File(movieJson);
+       // File file = new File(movieJson);
 
         //parses data into a data tree collection
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = null;
-        try {
-            jsonNode = mapper.readTree(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       // ObjectMapper mapper = new ObjectMapper();
+       // JsonNode jsonNode = null;
+       // try {
+        //    jsonNode = mapper.readTree(file);
+       // } catch (IOException e) {
+       //     e.printStackTrace();
+       // }
         //pulls out specific data you want from node string data tree
-        String movieTitle = String.valueOf(jsonNode.get("title"));
-        String movieOverview = String.valueOf(jsonNode.get("overview"));
-        String movieReleaseDate = String.valueOf(jsonNode.get("release_date"));
-        System.out.println(movieTitle + "\n" + movieOverview + "\n" + movieReleaseDate);
+       // String movieTitle = String.valueOf(jsonNode.get("title"));
+       // String movieOverview = String.valueOf(jsonNode.get("overview"));
+       // String movieReleaseDate = String.valueOf(jsonNode.get("release_date"));
+       // System.out.println(movieTitle + "\n" + movieOverview + "\n" + movieReleaseDate);
 
     }
+
 }

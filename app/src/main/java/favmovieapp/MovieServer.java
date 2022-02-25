@@ -18,17 +18,17 @@ public class MovieServer {
         }
     }
 
-    public void run(MovieService) {
-        while (server.isBound())
+   // public void run(MovieService) {
+      //  while (server.isBound())
             //incoming client
         {
-            try {
-                Socket socket = server.accept();
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                for (String movieJson : movieJson.movieRay)
-            } catch (IOException e) {
-                e.printStackTrace();
+         //   try {
+            //    Socket socket = server.accept();
+              //  PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                //for (String movieJson : movieJson.movieRay)
+           // } catch (IOException e) {
+             //   e.printStackTrace();
             }
         }
-    }
-}
+    //}
+//}

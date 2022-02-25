@@ -4,24 +4,76 @@
 package favmovieapp;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.common.io.Files;
 import favmovieapp.Repositories.MovieRepository;
 import favmovieapp.domains.Movies;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
+import java.util.List;
 
 import static favmovieapp.MovieServer.server;
 
 
 public class App {
+    //static String movieJson = "{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[18],\"id\":292767,\"original_language\":\"en\",\"original_title\":\"Clean and Narrow\",\"overview\":\"An ex-convict tries to make an honest living and take care of his girlfriend and her mentally slow brother.\",\"poster_path\":\"\\/tRG75Q8h9ghfs4RbpCXnQCbjD3P.jpg\",\"release_date\":\"1999-01-02\",\"title\":\"Clean and Narrow\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0,\"popularity\":1.095,\"id_imdb\":\"tt0212059\"}";
+    static ObjectMapper mapper = new ObjectMapper();
+
+
 
     public static void main(String[] args) {
-        String movieJson = "{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[18],\"id\":292767,\"original_language\":\"en\",\"original_title\":\"Clean and Narrow\",\"overview\":\"An ex-convict tries to make an honest living and take care of his girlfriend and her mentally slow brother.\",\"poster_path\":\"\\/tRG75Q8h9ghfs4RbpCXnQCbjD3P.jpg\",\"release_date\":\"1999-01-02\",\"title\":\"Clean and Narrow\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0,\"popularity\":1.095,\"id_imdb\":\"tt0212059\"}";
-        Movies movies = new Movies(movieJson);
-        MovieRepository movieRepository = new MovieRepository();
-        MovieService movieService = new MovieService();
-        MovieServer movieServer = new MovieServer(8080);
-        server.run(movieService);
+        //Initialize ObjectMapper
+       //ObjectMapper mapper = new ObjectMapper();
+        //import src data
+
+
+        //Deserialize data and put into object class
+        JsonNode movieNode;
+
+        try {
+            String movieJson = "{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[18],\"id\":292767,\"original_language\":\"en\",\"original_title\":\"Clean and Narrow\",\"overview\":\"An ex-convict tries to make an honest living and take care of his girlfriend and her mentally slow brother.\",\"poster_path\":\"\\/tRG75Q8h9ghfs4RbpCXnQCbjD3P.jpg\",\"release_date\":\"1999-01-02\",\"title\":\"Clean and Narrow\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0,\"popularity\":1.095,\"id_imdb\":\"tt0212059\"}";
+            movieNode = mapper.readValue(movieJson, JsonNode.class);
+            String movieTitle = String.valueOf(movieNode.get("title"));
+            String movieOverview = String.valueOf(movieNode.get("overview"));
+            String movieReleaseDate = String.valueOf(movieNode.get("release_date"));
+            //System.out.println(movieTitle + "\n" + movieOverview + "\n" + movieReleaseDate);
+            //Creating search function
+            String searchQuery = "Clean and Narrow";
+            for (String movie: movieNode.findValuesAsText(movieTitle)) {
+                if (movie.contains(searchQuery))
+                    System.out.println(movie);
+           }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        //creating search function
 
 
 
         }
+
+
+        // Movies movies = new Movies(movieJson);
+        // MovieRepository movieRepository = new MovieRepository();
+        //MovieService movieService = new MovieService();
+        // MovieServer movieServer = new MovieServer(8080);
+        // server.start(movieService);
+
+
     }
-}
+       // public void Movies(String jsonNode){
+           // String movieTitle = String.valueOf(jsonNode.get("title"));
+           // String movieOverview = String.valueOf(jsonNode.get("overview"));
+           // String movieReleaseDate = String.valueOf(jsonNode.get("release_date"));
+           // System.out.println(movieTitle + "\n" + movieOverview + "\n" + movieReleaseDate);
+
+
+
+
+
