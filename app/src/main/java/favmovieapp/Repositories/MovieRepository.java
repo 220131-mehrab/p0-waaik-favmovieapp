@@ -1,27 +1,78 @@
 package favmovieapp.Repositories;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvException;
+import favmovieapp.domains.Movies;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 
 public class MovieRepository {
+    private List<Movies> movies;
 
 
+    public MovieRepository(String csvFile) {
+        loadCSV(csvFile);
 
     }
-            //String movieJson = "{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[18],\"id\":292767,\"original_language\":\"en\",\"original_title\":\"Clean and Narrow\",\"overview\":\"An ex-convict tries to make an honest living and take care of his girlfriend and her mentally slow brother.\",\"poster_path\":\"\\/tRG75Q8h9ghfs4RbpCXnQCbjD3P.jpg\",\"release_date\":\"1999-01-02\",\"title\":\"Clean and Narrow\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0,\"popularity\":1.095,\"id_imdb\":\"tt0212059\"}";
-            //parses data into a data tree collection
-            //JsonNode jsonNode = mapper.readTree(movieJson);
-            //pulls out specific data you want from node string data tree
-            //String movieTitle = String.valueOf(jsonNode.get("title"));
-            //String movieOverview = String.valueOf(jsonNode.get("overview"));
-            //String movieReleaseDate = String.valueOf(jsonNode.get("release_date"));
-            //System.out.println(movieTitle + "\n" + movieOverview + "\n" + movieReleaseDate);
+
+    public List<Movies> getMovies() {
+        return movies;
+    }
+
+    private void loadCSV(String csvFile) {
+        //Load CSV into BufferedReader
+            try {
+               URI uri = Objects.requireNonNull(MovieRepository.class.getClassLoader().getResource(csvFile)).toURI();
+               Path filepath = Paths.get(Objects.requireNonNull(uri));
+                BufferedReader br = Files.newBufferedReader(filepath);
+                parseMovies(br);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                System.err.println("Couldn't load file");
+                e.printStackTrace();
+        }
+    }
+
+    private void parseMovies(BufferedReader br)  {
+        movies = new ArrayList<>();
+        //Read and parse Using OpenCSV
+        CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
+        CSVReader reader = new CSVReaderBuilder(br).withCSVParser(parser).withSkipLines(1).build();
+        List<String[]> lines = null;
+        try {
+            lines = reader.readAll();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (CsvException e) {
+            e.printStackTrace();
+        }
 
 
+        //parsing function into Movies Array
+        for (String[] columns : lines){
+            movies.add(new Movies(Integer.parseInt(columns[0]), columns[1])); //Adding parsed data into new Moives object
+        }
 
+    }
 
+}
 
 
 

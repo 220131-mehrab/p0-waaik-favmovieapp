@@ -1,4 +1,4 @@
-package favmovieapp;
+package favmovieapp.Server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
