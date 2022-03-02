@@ -3,6 +3,10 @@ package favmovieapp.Service;
 import favmovieapp.Repositories.MovieRepository;
 import favmovieapp.domains.Movies;
 
+/** MovieService is where the data from the parsed source data, in the MovieRepository, is injected into MovieService to make it possible that you can search the movie database by name.
+ *
+ */
+
 public class MovieService {
 
     private MovieRepository movieRepository;

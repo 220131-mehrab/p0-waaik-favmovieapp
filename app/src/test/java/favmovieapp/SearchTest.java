@@ -19,7 +19,7 @@ public class SearchTest {
     }
 
     @Test
-    public void SearchByNameTest() {
+    public void SearchByRankTest() {
         //List<Movies> lines = MovieRepository.parseMovies(loadCSV("combined_rank_ordered_list.csv");
         String givenMovie = "The Godfather";
         String result = AppContext.getMovieService().searchByRank(1);

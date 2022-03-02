@@ -1,5 +1,9 @@
 package favmovieapp.domains;
 
+/** Movies is the class upon which the object Movies is built upon. Holding the variables and methods of said object.
+ *
+ */
+
 public class Movies {
     private int rank;
     private String name;

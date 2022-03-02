@@ -13,6 +13,9 @@ import org.apache.catalina.startup.Tomcat;
 
 import java.io.IOException;
 
+/** Class App is where the main functionality, user input and server creation takes place for the application.
+ *
+ */
 public class App {
 
     public static void main(String[] args) {

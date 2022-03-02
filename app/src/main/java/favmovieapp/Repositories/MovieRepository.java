@@ -65,16 +65,17 @@ public class MovieRepository {
         }
 
 
+
         //parsing function into Movies Array
         for (String[] columns : lines){
             movies.add(new Movies(Integer.parseInt(columns[0]), columns[1])); //Adding parsed data into new Moives object
-            System.out.println(movies);
-        }
 
+        }movies.forEach(System.out::println);
 
     }
-
 }
+
+
 
 
 

@@ -3,6 +3,10 @@ package favmovieapp;
 import favmovieapp.Repositories.MovieRepository;
 import favmovieapp.Service.MovieService;
 
+/** AppContext is here to build the MovieRepository and MovieService objects, so that their methods can used in the App class.
+ * Built with the source data that the MovieRepository and MovieService will be using.
+ */
+
 public class AppContext {
 
     //App context
