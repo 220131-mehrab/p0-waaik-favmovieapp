@@ -13,7 +13,7 @@ public class Movies {
         this.name = name;
     }
 
-    public int getRank() {
+    public int getRank(int rankInput) {
         return rank;
     }
 

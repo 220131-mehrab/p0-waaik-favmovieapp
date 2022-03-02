@@ -4,20 +4,42 @@
 package favmovieapp;
 
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.startup.Tomcat;
+
+import java.io.IOException;
+
 public class App {
 
     public static void main(String[] args) {
-        //App context. Returns the Service and Repository methods
+        //App context. Builds framework of and returns the Service and Repository methods
         AppContext.build();
-
-        String search = "The Godfather";
-        System.out.println(AppContext.getMovieService().searchByName(search));
-
-
-        //Serve on Tomcat Server
-       // Tomcat server = new Tomcat();
-        //server.getConnector();
-       // server.addContext("", null);
-        //server.addServlet("", "moviesServlet", new HttpSer);
+        int rankInput = 1;
+        String searchInput = "Casablanca";
+        System.out.println(AppContext.getMovieService().searchByName(searchInput));
+        System.out.println(AppContext.getMovieService().searchByRank(rankInput));
     }
 }
+        //Tomcat server = new Tomcat();
+       // server.getConnector();
+       // server.addContext("", null);
+       // server.addServlet("", "moviesServlet", new HttpServlet(){
+                   // @Override
+                   // protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+                     //   String searchInput = req.getParameter("Pulp Fiction");
+                     //   String result = AppContext.getMovieService().searchByName(searchInput);
+                      //  resp.getWriter().println(result);
+                  //  }
+               // }).addMapping("/movies");
+       // try {
+         //   server.start();
+       // } catch (LifecycleException e) {
+         //   e.printStackTrace();
+         //   System.err.println("Server failed to start");
+       // }
+
+

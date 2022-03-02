@@ -12,12 +12,20 @@ public class MovieService {
     }
 
 
-    public  String searchByName(String search) {
+    public  String searchByName(String searchInput) {
         for (Movies movie : movieRepository.getMovies()) {
-            if (movie.getName().equalsIgnoreCase(search)) {
+            if (movie.getName().equalsIgnoreCase(searchInput)) {
                 return movie.getName();
+
             }
         }
         return null;
-    }
+    }public String searchByRank(int rankInput) {
+        for (Movies movie : movieRepository.getMovies()) {
+            if (movie.getRank(rankInput) != 0)
+                return movie.getName();
+
+            }return null;
+        }
+
 }

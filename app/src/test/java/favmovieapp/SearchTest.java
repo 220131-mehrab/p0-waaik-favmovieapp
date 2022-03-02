@@ -11,21 +11,20 @@ import java.util.List;
 
 
 public class SearchTest {
-   static List<Movies> movies;
+    static List<Movies> movies;
+
     @Before
-    public static void setup(){
-    movies = AppContext.getMovieRepository().getMovies();
+    public static void setup() {
+        movies = AppContext.getMovieRepository().getMovies();
     }
 
     @Test
     public void SearchByNameTest() {
-       //List<Movies> lines = MovieRepository.parseMovies(loadCSV("combined_rank_ordered_list.csv");
-       String givenMovie = "The Godfather";
-       String result = AppContext.getMovieService().searchByName(givenMovie);
-       Assert.assertEquals(givenMovie, result);
+        //List<Movies> lines = MovieRepository.parseMovies(loadCSV("combined_rank_ordered_list.csv");
+        String givenMovie = "The Godfather";
+        String result = AppContext.getMovieService().searchByRank(1);
+        Assert.assertEquals(givenMovie, result);
 
     }
-
-
-
 }
+
