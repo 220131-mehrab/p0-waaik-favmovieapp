@@ -18,11 +18,11 @@ public class Movies {
     }
 
     public int getRank(int rankInput) {
-        return rank;
+        return this.rank;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setRank(int rank) {
@@ -36,9 +36,8 @@ public class Movies {
     //Converts object into a printable version
     @Override
     public String toString() {
-        return "Movies {" +
-                "rank=" + rank +
-                ", name=" + name + '\'' +
-                '}';
+        return "Movies :" +
+                "rank=" + this.rank +
+                ", name=" + this.name;
     }
 }

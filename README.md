@@ -11,3 +11,5 @@ This is an app that list the "Greatest Films of All Time" database, with titles 
 #How to use:
 - User will go to browser location, and select see all movies.
 - User can select see all movies that are listed in the database.
+- User can input a name and return that movie.
+- User can input a rank and return that movie.

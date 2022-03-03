@@ -4,6 +4,8 @@
 package favmovieapp;
 
 
+import favmovieapp.Repositories.MovieRepository;
+import favmovieapp.domains.Movies;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,24 +27,37 @@ public class App {
         String searchInput = "Casablanca";
         System.out.println(AppContext.getMovieService().searchByName(searchInput));
         System.out.println(AppContext.getMovieService().searchByRank(rankInput));
+        System.out.println(AppContext.getMovieRepository().getMovies().toString());
+        //}
+//}
+        Tomcat server = new Tomcat();
+        server.getConnector();
+        server.addContext("", null);
+        server.addServlet("", "moviesServlet", new HttpServlet() {
+            @Override
+            protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+                String searchInput = req.getParameter("name");
+                if (searchInput != null) {
+                    String result = AppContext.getMovieService().searchByName(searchInput);
+                    resp.getWriter().println(result);
+                } else {
+                    for (Movies movies : MovieRepository.getMovies()) {
+                        resp.getWriter().println(movies + "");
+                    }
+                    resp.getWriter().println("\n");
+                }
+
+            }
+        }).addMapping("/movies");
+        try {
+            server.start();
+        } catch (LifecycleException e) {
+            e.printStackTrace();
+            System.err.println("Server failed to start");
+        }
     }
 }
-        //Tomcat server = new Tomcat();
-       // server.getConnector();
-       // server.addContext("", null);
-       // server.addServlet("", "moviesServlet", new HttpServlet(){
-                   // @Override
-                   // protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                     //   String searchInput = req.getParameter("Pulp Fiction");
-                     //   String result = AppContext.getMovieService().searchByName(searchInput);
-                      //  resp.getWriter().println(result);
-                  //  }
-               // }).addMapping("/movies");
-       // try {
-         //   server.start();
-       // } catch (LifecycleException e) {
-         //   e.printStackTrace();
-         //   System.err.println("Server failed to start");
-       // }
+//}
 
 

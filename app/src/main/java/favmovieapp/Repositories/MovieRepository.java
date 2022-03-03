@@ -9,7 +9,6 @@ import favmovieapp.domains.Movies;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -18,26 +17,25 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 
 public class MovieRepository {
-    private List<Movies> movies;
+    private static List<Movies> movies;
 
 
-    public MovieRepository(String csvFile) {
-        loadCSV(csvFile);
+    public MovieRepository(String movieCSVFile) {
+        loadCSV(movieCSVFile);
 
     }
 
-    public List<Movies> getMovies() {
+    public static List<Movies> getMovies() {
         return movies;
     }
 
-    private void loadCSV(String csvFile) {
+    private void loadCSV(String movieCSVFile) {
         //Load CSV into BufferedReader
             try {
-               URI uri = Objects.requireNonNull(MovieRepository.class.getClassLoader().getResource(csvFile)).toURI();
+               URI uri = Objects.requireNonNull(MovieRepository.class.getClassLoader().getResource(movieCSVFile)).toURI();
                Path filepath = Paths.get(Objects.requireNonNull(uri));
                 BufferedReader br = Files.newBufferedReader(filepath);
                 parseMovies(br);
@@ -50,7 +48,7 @@ public class MovieRepository {
     }
 
     private void parseMovies(BufferedReader br)  {
-        movies = new ArrayList<>();
+        this.movies = new ArrayList<>();
         //Read and parse Using OpenCSV
         CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
         CSVReader reader = new CSVReaderBuilder(br).withCSVParser(parser).withSkipLines(1).build();
@@ -68,11 +66,15 @@ public class MovieRepository {
 
         //parsing function into Movies Array
         for (String[] columns : lines){
-            movies.add(new Movies(Integer.parseInt(columns[0]), columns[1])); //Adding parsed data into new Moives object
+            this.movies.add(new Movies(Integer.parseInt(columns[0]), columns[1])); //Adding parsed data into new Moives object
 
-        }movies.forEach(System.out::println);
+        }
+        //movies.forEach(System.out::println);
 
     }
+
+
+
 }
 
 
